@@ -1,0 +1,4 @@
+flask
+pybase64
+opencv-python
+numpy
