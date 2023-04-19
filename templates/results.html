@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Results</title>
+    <style>
+        img {
+            max-width: 256px;
+            height: auto;
+        }
+    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <center><h1>Results</h1></center>
+    <!-- <img src="data:image/png;base64,{{ img }}" alt="Graded Image"> -->
+    
+    <center><form action="/upload" method="get">
+        <p>{{ result }}</p>
+        <input type="submit" value="New Workpiece">
+    </form>
+</center>
+</body>
+</html>
