@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1><center>Instructions</center></h1>
+    <p><center>Upload an image of the template to grade other workpieces.</center></p>
+    <center><h1>Grading Tool</h1></center>
+    <center><form method="post" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="template_image">Upload template image</label>
+        <input type="file" class="form-control-file" id="template_image" name="template_image" accept=".jpg,.jpeg,.png" required>
+      </div>
+      <br><br>
+      <button type="submit" class="btn btn-primary">Upload and start session</button>
+    </form>
+    </center>
+</body>
+</html>
