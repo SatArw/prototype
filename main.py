@@ -1,10 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for,session
 import cv2
-from script import grade_workpiece
-import base64
-import io
 import numpy as np
-import tempfile
 import os
 UPLOAD_FOLDER = os.path.join(os.getcwd(), 'uploads')
 
