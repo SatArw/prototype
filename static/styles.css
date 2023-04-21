@@ -1,90 +1,89 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Image Upload</title>
-    <style>
-        #canvas, #preview {
-            max-width: 100%;
-            height: auto;
-        }
-    </style>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-</head>
-<body>
-    <center><h1>Image Upload</h1></center>
+/* Set a light peach background for all pages */
+body {
+    background-color: #FFE5B4;
+}
 
-    <center><div id="camera-section">
-        <h2>Take a picture</h2>
-        <center><video id="video" autoplay></video></center>
-        <canvas id="canvas"></canvas>
-        <br>
-        <button id="capture">Capture Image</button>
-    </div></center>
+/* Set the default font */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+/* Style the upload button */
+.upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 
-    <center><div id="file-section">
-        <h2>Upload an image</h2>
-        <form action="/upload" method="post" enctype="multipart/form-data">
-            <input type="file" name="file">
-            <br><br>
-            <input type="submit" value="Upload">
-        </form>
-    </div></center>
+.btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
 
-    <center><div id="preview-section">
-        <h2>Preview</h2>
-        <img id="preview">
-        <form action="/results" method="post">
-            <input type="hidden" name="img_data" id="img_data" value="">
-            <br><br>
-            <input type="submit" value="Grade">
-        </form>
-    </div></center>
+.btn:hover {
+    background-color: #0069d9;
+}
 
-    <script>
-        const cameraSection = document.getElementById('camera-section');
-        const fileSection = document.getElementById('file-section');
-        const previewSection = document.getElementById('preview-section');
-        const video = document.getElementById('video');
-        const canvas = document.getElementById('canvas');
-        const context = canvas.getContext('2d');
-        const captureButton = document.getElementById('capture');
-        const previewImg = document.getElementById('preview');
-        const imgDataInput = document.getElementById('img_data');
+/* Style the browse button */
+.upload-btn-wrapper input[type=file] {
+    font-size: 1.2em;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+}
 
-        function showCameraSection() {
-            cameraSection.style.display = 'block';
-            fileSection.style.display = 'none';
-        }
+/* Style the images */
+.workpiece {
+    max-width: 256px;
+    height: auto;
+    border: 5px solid #007bff;
+    margin: 10px;
+    padding: 10px;
+}
 
-        function showFileSection() {
-            cameraSection.style.display = 'none';
-            fileSection.style.display = 'block';
-        }
+/* Style the text */
+.text {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
 
-        function showPreviewSection(imgData) {
-            cameraSection.style.display = 'none';
-            fileSection.style.display = 'none';
-            previewSection.style.display = 'block';
-            previewImg.src = imgData;
-            imgDataInput.value = imgData;
-        }
+/* Style the input fields */
+.input-field {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+}
 
-        function capture() {
-            context.drawImage(video, 0, 0, canvas.width, canvas.height);
-            const imgData = canvas.toDataURL('image/jpeg');
-            showPreviewSection(imgData);
-        }
+.input-field:focus {
+    outline: none;
+    background-color: #ddd;
+}
 
-        navigator.mediaDevices.getUserMedia({ video: true })
-            .then(stream => {
-                video.srcObject = stream;
-            })
-            .catch(error => {
-                console.error(error);
-                showFileSection();
-            });
+/* Style the 'New Workpiece' button */
+.new-workpiece-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+}
 
-        captureButton.addEventListener('click', capture);
-    </script>
-</body>
-</html>
+.new-workpiece-btn:hover {
+    background-color: #0069d9;
+}

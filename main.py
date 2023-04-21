@@ -14,7 +14,6 @@ def home():
     if request.method == 'POST':
         # Get the template image from the request
         template_image = request.files['template_image']
-        
         # Save the template image to a temporary directory on the server
         template_path = os.path.join(app.config['UPLOAD_FOLDER'], template_image.filename)
         template_image.save(template_path)
@@ -32,7 +31,6 @@ def home():
 def upload():
     template_path = session.get('template_path', None)
     if request.method == 'POST':
-        print("Post request from upload initiated")
         file = request.files['file']
         img = cv2.imdecode(np.fromstring(file.read(), np.uint8), cv2.IMREAD_COLOR)
         img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
