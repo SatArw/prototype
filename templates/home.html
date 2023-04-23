@@ -5,17 +5,39 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
+  <nav>
+		<div class="navbar">
+			<a href="{{ url_for('home') }}" class="active">Home</a>
+			<a href="{{ url_for('upload') }}">Upload</a>
+		</div>
+	</nav>
     <h1><center>Instructions</center></h1>
     <p><center>1. Upload an image of the template and start the grading session.<br>2. Upload images from your files or camera.<br>3. Send the images to be graded and note down the grade.</center></p>
     <center><h3>Grading Tool</h3></center>
-    <center><form method="post" enctype="multipart/form-data">
+
+    <center>
+      <form method="post" enctype="multipart/form-data">
       <div class="form-group">
         <label for="template_image">Upload template image</label>
-        <input type="file" class="form-control-file" id="template_image" name="template_image" accept=".jpg,.jpeg,.png" required>
+        <input type="file" class="form-control-file" id="template_image" name="template_image" accept="image/*" onchange="loadFile(event)" required >
+      </div>
+      <div class="form-group">
+        <img id="preview" width="300px" height="auto">
       </div>
       <br><br>
       <button type="submit" class="btn btn-primary">Upload and start session</button>
     </form>
     </center>
+
+    <script>
+      var loadFile = function(event) {
+        var reader = new FileReader();
+        reader.onload = function(){
+          var output = document.getElementById('preview');
+          output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+      };
+    </script>
 </body>
 </html>
