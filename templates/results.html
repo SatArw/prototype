@@ -11,6 +11,12 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
+      <nav>
+		<div class="navbar">
+			<a href="{{ url_for('home') }}" class="active">Home</a>
+			<a href="{{ url_for('upload') }}">Upload</a>
+		</div>
+	</nav>
     <center><h1>Results</h1></center>
     <!-- <img src="data:image/png;base64,{{ img }}" alt="Graded Image"> -->
     
