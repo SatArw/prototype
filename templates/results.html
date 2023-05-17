@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Results</title>
     <style>
         img {
@@ -11,7 +12,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-      <nav>
+    <nav>
 		<div class="navbar">
 			<a href="{{ url_for('home') }}" class="active">Home</a>
 			<a href="{{ url_for('upload') }}">Upload</a>
@@ -19,7 +20,7 @@
 	</nav>
     <center><h1>Results</h1></center>
     <!-- <img src="data:image/png;base64,{{ img }}" alt="Graded Image"> -->
-    
+
     <center><form action="/upload" method="get">
         <p>{{ result }}</p>
         <input type="submit" value="New Workpiece">
@@ -27,4 +28,3 @@
 </center>
 </body>
 </html>
-    

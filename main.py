@@ -2,13 +2,12 @@ from flask import Flask, render_template, request, redirect, url_for,session
 import cv2
 import numpy as np
 import os
+
 UPLOAD_FOLDER = os.path.join(os.getcwd(), 'uploads')
-
-# from script import grade_workpiece
-
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = "DOMATORRETO"
+
 @app.route('/', methods=['GET', 'POST'])
 def home():
     if request.method == 'POST':
@@ -17,13 +16,13 @@ def home():
         # Save the template image to a temporary directory on the server
         template_path = os.path.join(app.config['UPLOAD_FOLDER'], template_image.filename)
         template_image.save(template_path)
-        
+
         # Store the path to the template image in the session
         session['template_path'] = template_path
-        
+
         # Redirect the user to the upload page
         return redirect(url_for('upload'))
-    
+
     # Render the home page with the template image upload form
     return render_template('home.html')
 
@@ -47,7 +46,7 @@ def upload():
         bottom_right = (top_left[0] + w, top_left[1] + h)
         img = img[top_left[1]:bottom_right[1],top_left[0]:bottom_right[0]] #this crops out the area where the template was found
 
-        #resize image to reduce computational load  
+        #resize image to reduce computational load
         base_size = 256
         h1,h2 = int(base_size*img.shape[0]/img.shape[1]), int(base_size*template.shape[0]/template.shape[1])
         img = cv2.resize(img,(base_size,h1))
@@ -59,16 +58,16 @@ def upload():
         pc = round(np.corrcoef(img_flat,template_flat)[0][1],3)
         # print("The correlation with template is ",pc)
         result = ""
-        if pc >= 0.9:
+        if pc >= 0.783:
             result = "Grade for this workpiece = {}".format(10)
-        elif pc >= 0.86:
+        elif pc >= 0.745:
             result = "Grade for this workpiece = {}".format(9)
-        elif pc >=0.7:
+        elif pc >=0.69:
             result = "Grade for this workpiece = {}".format(8)
         else:
             result = "Incorrect image, please check the image and positioning of the workpiece"
 
-        # img_str = base64.b64encode(cv2.imencode('.png', img)[1]).decode() 
+        # img_str = base64.b64encode(cv2.imencode('.png', img)[1]).decode()
         return redirect(url_for('results', result=result))
     return render_template('upload.html')
 
